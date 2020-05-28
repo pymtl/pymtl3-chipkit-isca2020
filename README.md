@@ -2,8 +2,7 @@
 Code Examples for PyMTL3 Talk at CHIPKIT Tutorial 2020
 ==========================================================================
 
-[![Run on Repl.it](https://repl.it/badge/github/pymtl/pymtl3-chipkit-isca2020)](https://repl.it/github/pymtl/pymtl3-chipkit-isca2020)
-[![Build Status](https://travis-ci.com/pymtl/pymtl3-chipkit-isca2020.svg?branch=master)](https://travis-ci.com/pymtl/pymtl3-chipkit-isca2020)
+[![Run on Repl.it](https://repl.it/badge/github/pymtl/pymtl3-chipkit-isca2020)](https://repl.it/github/pymtl/pymtl3-chipkit-isca2020)[![Build Status](https://travis-ci.com/pymtl/pymtl3-chipkit-isca2020.svg?branch=master)](https://travis-ci.com/pymtl/pymtl3-chipkit-isca2020)
 
 This repo contains the simple code examples used in PyMTL3 talk for the
 CHIPKIT tutorial at ISCA 2020. Note that these are simple gate-level
