@@ -1,12 +1,12 @@
 #=========================================================================
-# NstageRegIncrGL
+# NstageRegIncrGL_v
 #=========================================================================
 
 from pymtl3 import *
 from RegIncrGL import RegIncrGL
 
 class NstageRegIncrGL( Component ):
-  def construct( s, nbits=4, nstages=1 ):
+  def construct( s, nbits=4, nstages=2 ):
     s.in_ = InPort (nbits)
     s.out = OutPort(nbits)
 
@@ -29,7 +29,7 @@ from pymtl3.passes.tracing.VcdGenerationPass import VcdGenerationPass
 
 if __name__ == "__main__":
 
-  dut = NstageRegIncrGL(nstages=4)
+  dut = NstageRegIncrGL(nstages=2)
 
   # Use hierarchical parameter system
 
@@ -39,10 +39,11 @@ if __name__ == "__main__":
 
   dut.set_metadata( VcdGenerationPass.vcd_file_name, "dump" )
 
-  # Turn on Verilog translation and apply corresponding passes
+  # Turn on Verilog translation/import and apply corresponding passes
 
-  dut.set_metadata( VerilogTranslationPass.enable, True )
-  dut.apply( VerilogTranslationPass() )
+  dut.set_metadata( VerilogTranslationImportPass.enable, True )
+  dut.apply( VerilogPlaceholderPass() )
+  dut = VerilogTranslationImportPass()( dut )
 
   # Apply default pass group and simulate
 
@@ -61,5 +62,5 @@ if __name__ == "__main__":
   dut.sim_tick()
   dut.sim_tick()
 
-  print()
+  dut.print_textwave()
 

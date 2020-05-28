@@ -71,7 +71,7 @@ import hypothesis
 from hypothesis       import strategies as st
 from pymtl3.datatypes import strategies as pst
 
-@hypothesis.settings(max_examples=25)
+@hypothesis.settings( max_examples=25, deadline=None )
 @hypothesis.given( nbits=st.integers(1,64), data=st.data() )
 def test_hypothesis( nbits, data ):
 
