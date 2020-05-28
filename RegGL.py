@@ -1,21 +1,20 @@
 #=========================================================================
-# FullAdderGL
+# RegGL
 #=========================================================================
 
 from pymtl3 import *
+from FlipFlopGL import FlipFlopGL
 
-class FullAdderGL( Component ):
-  def construct( s ):
-    s.a    = InPort()
-    s.b    = InPort()
-    s.cin  = InPort()
-    s.sum  = OutPort()
-    s.cout = OutPort()
+class RegGL( Component ):
+  def construct( s, nbits=4 ):
+    s.in_ = InPort (nbits)
+    s.out = OutPort(nbits)
 
-    @update
-    def upblk():
-      s.sum  @= s.cin ^ s.a ^ s.b
-      s.cout @= ( ( s.a ^ s.b ) & s.cin ) | ( s.a & s.b )
+    s.ffs = [ FlipFlopGL() for _ in range(nbits) ]
+
+    for i in range(nbits):
+      s.in_[i] //= s.ffs[i].d
+      s.out[i] //= s.ffs[i].q
 
 #-------------------------------------------------------------------------
 # main
@@ -23,18 +22,17 @@ class FullAdderGL( Component ):
 
 if __name__ == "__main__":
 
-  dut = FullAdderGL()
+  dut = RegGL()
   dut.apply( DefaultPassGroup(textwave=True) )
   dut.sim_reset()
 
-  dut.a   @= 0
-  dut.b   @= 1
-  dut.cin @= 0
+  dut.in_ @= 0
   dut.sim_tick()
 
-  dut.a   @= 1
-  dut.b   @= 1
-  dut.cin @= 1
+  dut.in_ @= 4
+  dut.sim_tick()
+
+  dut.in_ @= 6
   dut.sim_tick()
   dut.sim_tick()
 
