@@ -11,11 +11,11 @@ class RegIncrGL( Component ):
     s.in_  = InPort (nbits)
     s.out  = OutPort(nbits)
 
-    s.reg  = RegGL(nbits)
+    s.reg_ = RegGL(nbits)
     s.incr = Adder(nbits)
 
-    s.reg.in_ //= s.in_
-    s.incr.in0 //= s.reg.out
+    s.reg_.in_ //= s.in_
+    s.incr.in0 //= s.reg_.out
     s.incr.in1 //= incr_value
     s.out      //= s.incr.out
 
